@@ -7,10 +7,10 @@ This script pushes the data to ELK
 
 This code is tested on CentOS and requires the following software to be successful:
 
-Nexpose Reporting User
+Nexpose Reporting User<br>
 User: reporting<br>
-Roles: Custom
-Privileges:
+Roles: Custom<br>
+Privileges:<br>
 * Appear on Ticket and Report Lists
 * View Site Asset Data
 * View Group Asset Data
