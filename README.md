@@ -8,8 +8,9 @@ This script pushes the data to ELK
 This code is tested on CentOS and requires the following software to be successful:
 
 Nexpose Reporting User
+
 User: reporting
-Roles: 
+Roles: Custom
 Privileges:
 * Appear on Ticket and Report Lists
 * View Site Asset Data
