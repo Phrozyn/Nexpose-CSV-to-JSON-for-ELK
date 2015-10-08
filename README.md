@@ -5,7 +5,10 @@ I pull SQL reports from Nexpose - and I wanted to manipulate the data and make i
 I also wanted to use this as an opportunity to learn more about ELK, sed, and bash.
 This script pushes the data to ELK
 
-This code is tested on CentOS and requires the following software to be successful:
+This code is tested on CentOS.
+I will be testing on Ubuntu as well.
+
+To run this script requires the following software to be successful:
 
 Nexpose Reporting User<br>
 User: reporting<br>
