@@ -1,3 +1,4 @@
+-- This was obtained from the Nexpose community site @https://community.rapid7.com/docs/DOC-2613
 SELECT 
 CASE
    WHEN dve.scope_id = 'G' THEN 'All instances across all assets'
