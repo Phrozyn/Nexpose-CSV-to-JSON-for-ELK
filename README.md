@@ -5,8 +5,7 @@ I pull SQL reports from Nexpose - and I wanted to manipulate the data and make i
 I also wanted to use this as an opportunity to learn more about ELK, sed, and bash.
 This script pushes the data to ELK
 
-This code is tested on CentOS.
-I will be testing on Ubuntu as well.
+This code is tested on CentOS 6.7 and Ubuntu 14.04.3
 
 To run this script requires the following software to be successful:
 
@@ -31,9 +30,9 @@ There are several directories involved.<br>
 2) The new nexpose report directory - with the report renamed to the reportname directory<br>
 	/opt/jsondata/reports/nexpose/SQL-Report_YYYY-MM-DD_HH-MM-SS_report.csv<br>
 3) The json report directories - named according to type (in my case I have two reports - one for scans and one for exceptions)<br>
-  /opt/jsondata/reports/json/scan and /opt/jsondata/reports/json/exception<br>
+        /opt/jsondata/reports/json/scan and /opt/jsondata/reports/json/exception<br>
 4) The processed directory where processed reports are placed.<br>
-  /opt/rapid7/nexpose/nsc/reports/<user>/processed/<br>
+        /opt/rapid7/nexpose/nsc/reports/<user>/processed/<br>
   
 What this script does:
   
