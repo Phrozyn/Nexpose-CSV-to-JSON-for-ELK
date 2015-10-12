@@ -108,11 +108,11 @@ function prep {
                 then
                         sed -i 's/{/{"index":{"_index":"nexpose","_type":"exception"}}\n{/g' $file
                         # Bulk post json events into elk
-                        curl --user kibbles:meddlingKid5 'http://elk.phrozyn.net:909/_bulk?' --data-binary @$file
+                        curl --user user:pass 'http://your.elk.host:909/_bulk?' --data-binary @$file
                 else
                         sed -i 's/{/{"index":{"_index":"nexpose","_type":"scan"}}\n{/g' $file
                         # Bulk post json events into elk
-                        curl --user kibbles:meddlingKid5 'http://elk.phrozyn.net:909/_bulk?' --data-binary @$file
+                        curl --user user:pass 'http://your.elk.host:909/_bulk?' --data-binary @$file
                 fi
 
         done
