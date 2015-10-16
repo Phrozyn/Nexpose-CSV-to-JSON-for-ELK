@@ -1,4 +1,6 @@
 -- This was obtained from the Nexpose community site @https://community.rapid7.com/thread/4195
+-- I have made some changes from the original
+
 WITH
    asset_ips AS (
       SELECT asset_id, ip_address, type
@@ -21,6 +23,13 @@ WITH
       SELECT asset_id, riskscore, exploits, malware_kits
       FROM fact_asset
    ),
+   asset_group AS (
+      SELECT distinct(daga.asset_id), da.ip_address, da.host_name, dag.name as asset_group
+	  FROM fact_asset_group fag
+	     JOIN dim_asset_group dag on dag.asset_group_id = fag.asset_group_id
+   		 JOIN dim_asset_group_asset daga on daga.asset_group_id = dag.asset_group_id
+   		 JOIN dim_asset da on da.asset_id = daga.asset_id
+   ),
    vulnerability_metadata AS (
       SELECT *
          
@@ -36,13 +45,21 @@ SELECT
    aa.ipv4s AS "ipv4_addresses", aa.ipv6s AS "ipv6_addresses", da.ip_address AS "ip_address", aa.macs AS "mac_addresses",
    an.names AS "asset_names", dos.family AS "os_family", dos.name AS "os_name", dos.version AS "os_version", af.riskscore AS "risk_score", 
    af.exploits AS "exploit_count", 
+   -- Exploit Minimum Skill
+   -- Exploit URLs
    af.malware_kits AS "malware_kit_count",
+   ag.asset_group AS "Asset Group",
+   -- Malware Kit Names
    favi.scan_id AS "scan_id",
+   -- Scan Template Name
    dsvc.name AS "service_name",
    favi.port AS "service_port",
+   -- Service Product
    dp.name AS "service_protocol",
    ds.importance AS "site_importance",
    ds.name AS "site_name",
+   -- Vulnerability Additional URLS
+   -- Vulnerability Age
    vci.cves AS "cve_id",
    vm.cvss_score AS "cvss_score",
    vm.cvss_vector AS "cvss_vector",
@@ -50,16 +67,22 @@ SELECT
    favi.key AS "vulnerability_key", 
    vm.pci_status AS "pci_compliance_status",
    vm.date_published AS "vulnerability_published_date",
+   -- Vulnerability Reference IDs
+   -- Vulnerability Reference URLs
    vm.riskscore AS "risk_score",
    vm.severity AS "severity_level",
+   -- Vulnerability Solution
+   -- Vulnerability Tags
    favi.date AS "scan_date",
    favi.status_id AS "scan_result_code",
    dvs.description AS "scan_result_description",
    vm.title AS "vulnerability_title"
+   -- Vulnerable Since
 FROM fact_asset_vulnerability_instance favi
    JOIN dim_asset da USING (asset_id)
    LEFT OUTER JOIN asset_addresses aa USING (asset_id)
    LEFT OUTER JOIN asset_names an USING (asset_id)
+   LEFT OUTER JOIN asset_group ag USING (asset_id)
    LEFT OUTER JOIN vuln_cve_ids vci USING (vulnerability_id)
    JOIN dim_operating_system dos USING (operating_system_id)
    JOIN asset_facts af USING (asset_id)
