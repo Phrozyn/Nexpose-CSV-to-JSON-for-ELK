@@ -1,0 +1,1 @@
+{"settings":{"analysis":{"analyzer":{"comma":{"type":"pattern","pattern":"\\,+"}}}}}
